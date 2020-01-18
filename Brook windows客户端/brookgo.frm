@@ -244,7 +244,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Public strRunBrook As String, BKPID
+Public RunBrook As String, BKPID
 Private Sub Command1_Click()
     CommonDialog1.ShowOpen
     Text1.Text = CommonDialog1.FileName
@@ -293,10 +293,13 @@ Private Sub Command5_Click()
         Select Case tes
             Case Is = "mod=1"
                 Option1.Value = True
+                Call Option1_Click
             Case Is = "mod=2"
                 Option2.Value = True
+                Call Option2_Click
             Case Is = "mod=3"
                 Option3.Value = True
+                Call Option1_Click
         End Select
     Close #1
 End Sub
