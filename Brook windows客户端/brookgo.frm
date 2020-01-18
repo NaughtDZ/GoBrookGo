@@ -244,7 +244,7 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-Public RunBrook As String, BKPID
+Public strRunBrook As String, BKPID
 Private Sub Command1_Click()
     CommonDialog1.ShowOpen
     Text1.Text = CommonDialog1.FileName
@@ -272,6 +272,10 @@ Private Sub Command4_Click()
         Print #1, Text5.Text
         Print #1, Text6.Text
         Print #1, Text8.Text
+        If Option1.Value = True Then Print #1, "mod=1"
+        If Option2.Value = True Then Print #1, "mod=2"
+        If Option3.Value = True Then Print #1, "mod=3"
+        If Option1.Value = False And Option2.Value = False And Option3.Value = False Then MsgBox ("请选择连接模式")
     Close #1
 End Sub
 
@@ -285,7 +289,20 @@ Private Sub Command5_Click()
         Line Input #1, tes: Text5.Text = tes
         Line Input #1, tes: Text6.Text = tes
         Line Input #1, tes: Text8.Text = tes
+        Line Input #1, tes
+        Select Case tes
+            Case Is = "mod=1"
+                Option1.Value = True
+            Case Is = "mod=2"
+                Option2.Value = True
+            Case Is = "mod=3"
+                Option3.Value = True
+        End Select
     Close #1
+End Sub
+
+Private Sub Form_Load()
+   If Dir(App.Path & "\config.ini") <> "" Then Call Command5_Click
 End Sub
 
 Private Sub Option1_Click()
