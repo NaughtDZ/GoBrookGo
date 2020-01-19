@@ -65,17 +65,17 @@ Begin VB.Form Form1
    End
    Begin VB.Frame Frame1 
       Caption         =   "模式选择"
-      Height          =   2655
+      Height          =   1815
       Left            =   3840
       TabIndex        =   13
       Top             =   1800
       Width           =   2535
       Begin VB.OptionButton Option3 
          Caption         =   "VPN(全局)"
-         Height          =   615
+         Height          =   375
          Left            =   240
          TabIndex        =   16
-         Top             =   1800
+         Top             =   1320
          Width           =   1335
       End
       Begin VB.OptionButton Option2 
@@ -83,12 +83,12 @@ Begin VB.Form Form1
          Height          =   375
          Left            =   240
          TabIndex        =   15
-         Top             =   1080
+         Top             =   720
          Width           =   1335
       End
       Begin VB.OptionButton Option1 
          Caption         =   "Socks5"
-         Height          =   495
+         Height          =   255
          Left            =   240
          TabIndex        =   14
          Top             =   240
@@ -96,10 +96,10 @@ Begin VB.Form Form1
       End
       Begin VB.Label Label9 
          Caption         =   "请先选择brook程序地址或读取配置之后再选择模式"
-         Height          =   1215
+         Height          =   1095
          Left            =   1560
          TabIndex        =   25
-         Top             =   240
+         Top             =   360
          Width           =   735
       End
    End
@@ -164,6 +164,16 @@ Begin VB.Form Form1
       TabIndex        =   1
       Top             =   480
       Width           =   5295
+   End
+   Begin VB.Label Label10 
+      AutoSize        =   -1  'True
+      Caption         =   "状态：未启动"
+      ForeColor       =   &H000000FF&
+      Height          =   180
+      Left            =   3960
+      TabIndex        =   26
+      Top             =   4080
+      Width           =   1080
    End
    Begin VB.Label Label8 
       AutoSize        =   -1  'True
@@ -254,12 +264,16 @@ Private Sub Command2_Click()
     If RunBrook = "" Then
         MsgBox ("请选择连接模式")
     Else
-        BKPID = Shell(RunBrook)
+        BKPID = Shell(RunBrook, vbHide)
+        Label10.Caption = "状态：已启动"
+        Label10.ForeColor = RGB(0, 255, 0)
     End If
 End Sub
 
 Private Sub Command3_Click()
     Shell ("taskkill /pid " + CStr(BKPID))
+    Label10.Caption = "状态：未启动"
+    Label10.ForeColor = RGB(255, 0, 0)
 End Sub
 
 Private Sub Command4_Click()
@@ -306,6 +320,10 @@ End Sub
 
 Private Sub Form_Load()
    If Dir(App.Path & "\config.ini") <> "" Then Call Command5_Click
+End Sub
+
+Private Sub Image1_Click()
+
 End Sub
 
 Private Sub Option1_Click()
