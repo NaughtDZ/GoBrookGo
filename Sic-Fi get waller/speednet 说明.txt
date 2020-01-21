@@ -1,0 +1,23 @@
+一键脚本[debian  ubuntu]使用
+
+wget –no-check-certificate https://raw.githubusercontent.com/tennfy/debian_netspeeder_tennfy/master/debian_netspeeder_tennfy.sh
+
+chmod a+x debian_netspeeder_tennfy.sh
+
+bash debian_netspeeder_tennfy.sh
+
+一键脚本[centos]使用
+
+wget --no-check-certificate https://gist.github.com/LazyZhu/dc3f2f84c336a08fd6a5/raw/d8aa4bcf955409e28a262ccf52921a65fe49da99/net_speeder_lazyinstall.sh
+
+sh net_speeder_lazyinstall.sh
+查看 net-speeder 是否运行
+ps aux|grep net_speeder|grep -v grep
+
+停止net-speeder
+killall net_speeder
+
+启动net-speeder（KVM环境）
+nohup /root/net_speeder eth0 "ip" >/dev/null 2>&1 &
+启动net-speeder（openvz环境）
+nohup /root/net_speeder venet0 "ip" >/dev/null 2>&1 &
